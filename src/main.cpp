@@ -8,6 +8,7 @@ int main() {
   while(true){
 
     ss.clear();
+    args.clear();
     std::cout << std::unitbuf;
     std::cerr << std::unitbuf;
     
@@ -18,16 +19,18 @@ int main() {
     std::getline(std::cin, input);
     ss.str(input);
     ss >> command;
+    ss >> std::ws;
     args << ss.rdbuf();
 
-    if(command == "exit 0")
+    if(command == "exit")
       return 0;
     else if(command == "echo"){
       echo(args);
     }
     else
       std::cout << command << ": command not found" << std::endl;
-  
+    args.str("");
+    ss.str("");
     
   }
 }
