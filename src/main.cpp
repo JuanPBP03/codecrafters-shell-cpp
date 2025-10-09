@@ -22,10 +22,9 @@ int main() {
     ss >> std::ws;
     args << ss.rdbuf();
 
-    if(command == "exit")
-      return 0;
-    else if(command == "echo"){
-      echo(args);
+    auto it = BUILTIN_COMMANDS.find(command);
+    if(it != BUILTIN_COMMANDS.end()){
+      it->second(args);
     }
     else
       std::cout << command << ": command not found" << std::endl;

@@ -6,7 +6,9 @@
 
 enum sh_status_t{
     STATUS_OK,
-    STATUS_ERROR
+    STATUS_EXIT,
 };
+
+
 
 #endif
