@@ -1,4 +1,4 @@
-#include "builtins.cpp"
+#include "builtins.hpp"
 
 int main() {
   // Flush after every std::cout / std:cerr
