@@ -1,8 +1,8 @@
 #ifndef _BUILTINS_
 #define _BUILTINS_
-#include "myshell.hpp"
+#include "builtins.hpp"
 
-sh_status_t echo(std::stringstream& input);
+
 
 sh_status_t echo(std::stringstream& input){
 
