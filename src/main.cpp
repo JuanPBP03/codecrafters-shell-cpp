@@ -1,24 +1,34 @@
-#include <iostream>
-#include <string>
-
-
+#include "builtins.cpp"
 
 int main() {
   // Flush after every std::cout / std:cerr
+  std::stringstream ss;
+  std::string command;
+  std::stringstream args;
   while(true){
+
+    ss.clear();
     std::cout << std::unitbuf;
     std::cerr << std::unitbuf;
-
+    
     // Uncomment this block to pass the first stage
     std::cout << "$ ";
 
     std::string input;
     std::getline(std::cin, input);
-    if(input == "exit 0")
+    ss.str(input);
+    ss >> command;
+    args << ss.rdbuf();
+
+    if(command == "exit 0")
       return 0;
+    else if(command == "echo"){
+      echo(args);
+    }
     else
-      std::cout << input << ": command not found" << std::endl;
+      std::cout << command << ": command not found" << std::endl;
   
     
   }
 }
+
