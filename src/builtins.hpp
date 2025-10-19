@@ -1,8 +1,5 @@
 #pragma once
 #include "myshell.hpp"
-#include <unordered_map>
-#include <functional>
-
 
 sh_status_t echo(std::stringstream& args);
 

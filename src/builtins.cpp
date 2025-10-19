@@ -1,7 +1,5 @@
-#ifndef _BUILTINS_
-#define _BUILTINS_
 #include "builtins.hpp"
-
+#include "helpers.hpp"
 
 
 sh_status_t echo(std::stringstream& args){
@@ -14,21 +12,32 @@ sh_status_t echo(std::stringstream& args){
 sh_status_t type(std::stringstream& args){
 
     std::string arg;
+    std::vector<std::filesystem::path> PATH = get_PATH_dirs();
     args >> arg;
-    if(BUILTIN_COMMANDS.find(arg) != BUILTIN_COMMANDS.end()){
+    if(arg.empty()){
+         std::cout << arg << ": not found" << std::endl;
+    }else if(BUILTIN_COMMANDS.find(arg) != BUILTIN_COMMANDS.end()){
         std::cout << arg << " is a shell builtin" << std::endl;
-    }else{
-        std::cout << arg << ": not found" << std::endl;
-    }
-
-    
+    }else if(!PATH.empty()){
+            //std::cout<<"PATH FOUND"<< std::endl;
+            for(const auto& dir : PATH){
+              //  std::cout << "SEARCHING DIR: " << dir.string() << std::endl;
+                if(std::filesystem::exists(dir / (arg))){
+                    std::cout << arg << " is " << dir.string() << std::endl;
+                    return STATUS_OK;
+                }
+                
+            }
+            std::cout << arg << ": not found" << std::endl;
+        
+       
+        }
     return STATUS_OK;
-
 }
 
 sh_status_t shell_exit(std::stringstream& args){
     
-    int exit_code;
+    int exit_code = 0;
     args >> exit_code;
     exit(exit_code ? 0 : exit_code);
     
@@ -39,6 +48,3 @@ const std::unordered_map<std::string, std::function<sh_status_t(std::stringstrea
     {"exit", shell_exit},
     {"type", type}
 };
-
-
-#endif 
