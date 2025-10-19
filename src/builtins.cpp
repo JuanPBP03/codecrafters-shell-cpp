@@ -21,7 +21,7 @@ sh_status_t type(std::stringstream& args){
     }else if(!PATH.empty()){
             //std::cout<<"PATH FOUND"<< std::endl;
             for(const auto& dir : PATH){
-              //  std::cout << "SEARCHING DIR: " << dir.string() << std::endl;
+                fprintf(stderr, "DIR: %s", dir);
                 if(std::filesystem::exists(dir / (arg))){
                     std::cout << arg << " is " << (dir/arg).string() << std::endl;
                     return STATUS_OK;
