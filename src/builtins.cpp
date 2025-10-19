@@ -23,7 +23,7 @@ sh_status_t type(std::stringstream& args){
             for(const auto& dir : PATH){
               //  std::cout << "SEARCHING DIR: " << dir.string() << std::endl;
                 if(std::filesystem::exists(dir / (arg))){
-                    std::cout << arg << " is " << dir.string() << std::endl;
+                    std::cout << arg << " is " << (dir/arg).string() << std::endl;
                     return STATUS_OK;
                 }
                 
